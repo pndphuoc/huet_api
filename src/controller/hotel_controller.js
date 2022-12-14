@@ -3,14 +3,14 @@ const Hotel = require("../model/hotel");
 class HotelController {
   //Lay all danh sach Hotel
   getAllHotels(req, res, next) {
-    Cart.find({})
+    Hotel.find({})
       .then((hotel) => res.json(hotel))
       .catch((error) => next(error));
   }
 
   //Lay chi tiet mot hotel
   getHotel(req, res, next) {
-    Hotel.findOne({ _id: req.params.id })
+    Hotel.findOne({ id: req.params.id })
       .then((hotel) => res.json(hotel))
       .catch((error) => res.status(400).json({ message: "Access denied" }));
   }
