@@ -22,6 +22,11 @@ class TouristAttractionController {
       .then((data) => res.json(data))
       .catch((error) => next(error));
   }
+  // search(req, res, next) {
+  //   TouristAttraction.find({ CategoryId: parseInt(req.params.id) })
+  //     .then((data) => res.json(data))
+  //     .catch((error) => next(error));
+  // }
 }
 
 module.exports = new TouristAttractionController();

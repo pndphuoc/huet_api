@@ -4,6 +4,12 @@ class HotelController {
   //Lay all danh sach Hotel
   getAllHotels(req, res, next) {
     Hotel.find({})
+      .limit(10)
+      .then((hotel) => res.json(hotel))
+      .catch((error) => next(error));
+  }
+  getHotelLimit(req, res, next) {
+    Hotel.find({})
       .then((hotel) => res.json(hotel))
       .catch((error) => next(error));
   }
@@ -11,6 +17,24 @@ class HotelController {
   //Lay chi tiet mot hotel
   getHotel(req, res, next) {
     Hotel.findOne({ id: req.params.id })
+      .then((hotel) => res.json(hotel))
+      .catch((error) => res.status(400).json({ message: "Access denied" }));
+  }
+  //filterHoterl
+  filterHotel(req, res, next) {
+    let type = "";
+    if (req.params.accommodationType == "1") {
+      type = "Khách sạn";
+    }
+    if (req.params.accommodationType == "2") {
+      type = "Khu nghỉ dưỡng";
+    }
+    if (req.params.accommodationType == "3") {
+      type = "Nhà nghỉ Homestay";
+    }
+    Hotel.find({ accomPropertyType: type })
+      .sort({ starRating: -1 })
+      .limit(req.params.limit)
       .then((hotel) => res.json(hotel))
       .catch((error) => res.status(400).json({ message: "Access denied" }));
   }

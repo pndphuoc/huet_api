@@ -5,6 +5,8 @@ const FoodStoreController = require("../controller/FoodStoreController");
 const PostController = require("../controller/post_controller");
 const EventController = require("../controller/event_controller");
 const TouristAttraction = require("../controller/tourist_attraction_controller");
+const UserController = require("../controller/user_controller");
+const user_controller = require("../controller/user_controller");
 
 //foodstore
 routes.post("/foodstore/create", FoodStoreController.Add); //tạo mới cửa hàng ăn uống
@@ -25,14 +27,26 @@ routes.get("/hotel", HotelController.getAllHotels); // Get All Hotel
 routes.get("/hotel/:id", HotelController.getHotel); // Get detail one Hotel
 routes.post("/hotel/create", HotelController.insertHotel); // Add Hotel
 routes.post("/hotel/delete/:id", HotelController.deleteHotel);
+routes.get(
+  "/hotel/filterhotel/:accommodationType/:limit",
+  HotelController.filterHotel
+); //filter Hotel by accommodationType
 
 // Events
 routes.post("/event/create", EventController.addEvent); // Add event
 routes.get("/event", EventController.getAllEvent); // Get all Events
+routes.get("/event/geteventthismonth", EventController.getEventThisMonth); // Get all event this month
+routes.get("/event/geteventnextmonth", EventController.getEventNextMonth); // Get all event next month
 
 // Tourist_Attraction
 routes.get("/tourist", TouristAttraction.getAll); // Get all TouristAttraction
 routes.post("/tourist/create", TouristAttraction.insert); // Add TouristAttraction
 routes.get("/tourist/:id", TouristAttraction.filterTourist); // Get detail one Hotel
+// routes.post("/tourist/search",)
+
+//User
+routes.post("/user/create", user_controller.addUser); // Add user
+routes.post("/user/login", user_controller.login); // Add user
+routes.post("/user/checkimail", user_controller.checkIsmail); // Add user
 
 module.exports = routes;
